@@ -3,27 +3,27 @@
 // Use gdb or VS Code (breakpoints, step, watch) to find them; do NOT add printf.
 //
 // Record the bugs you find:
-//   Bug 1: line ..., symptom ..., fix ...
-//   Bug 2:
-//   Bug 3:
-//   Bug 4:
+//   Bug 1: line 16, symptom: sum_array omit first element, fix: change int i = 1 to int i = 0
+//   Bug 2: line 22, symptom: average is integer division, fix: cast to double
+//   Bug 3: line 26, symptom: max = 0 is false with negative numbers, fix: initialize max to a[0] instead of 0
+//   Bug 4: line 34, symptom: reverse_string does not reverse correctly, fix: change len to (int)len/2
 #include <stdio.h>
 
 #define N 5
 
 int sum_array(int a[], int n) {
     int sum = 0;
-    for (int i = 1; i < n; i++)
+    for (int i = 0; i < n; i++)
         sum += a[i];
     return sum;
 }
 
 double average(int a[], int n) {
-    return sum_array(a, n) / n;
+    return (double)sum_array(a, n) / n;
 }
 
 int max_array(int a[], int n) {
-    int max = 0;
+    int max = a[0];
     for (int i = 0; i < n; i++)
         if (a[i] > max)
             max = a[i];
@@ -31,7 +31,7 @@ int max_array(int a[], int n) {
 }
 
 void reverse_string(char s[], int len) {
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < (int)len/2; i++) {
         char tmp = s[i];
         s[i] = s[len - 1 - i];
         s[len - 1 - i] = tmp;
